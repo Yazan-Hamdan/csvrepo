@@ -1,0 +1,39 @@
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #232f3e;
+    padding: 16px 32px;
+  }
+  
+  nav p {
+    margin: 0;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+  
+  nav button {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-left: 16px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  nav button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  @media screen and (max-width: 768px) {
+    nav p {
+      display: none;
+    }
+  }
