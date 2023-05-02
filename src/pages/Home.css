@@ -1,5 +1,5 @@
 main {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 30px;
 }
@@ -70,4 +70,33 @@ td:last-child {
   border-radius: 5px;
   padding: 5px 10px;
   cursor: pointer;
+}
+
+section {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 16px;
+  margin: 16px 0;
+}
+
+section h2 {
+  margin-top: 0;
+}
+
+section pre {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.section-container {
+  padding-left: 10px;
+  position: absolute;
+  left: 80%;
+  top: 5%;
+}
+
+.section-container pre {
+  height: 500px;
+  overflow-y: scroll;
+  text-align: left;
 }

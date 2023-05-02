@@ -3,7 +3,7 @@ import Row from './Row.js';
 import './Table.css';
 
 const Table = (props) => {
-  const { files, onDelete, onViewJson } = props;
+  const { files, onDelete, onViewJson, onDownload, userGroup} = props;
 
   return (
     <table>
@@ -17,7 +17,7 @@ const Table = (props) => {
       </thead>
       <tbody>
         {files.map((file) => (
-          <Row key={file.Key} file={file} onDelete={onDelete} onViewJson={onViewJson} />
+          <Row key={file.Key} file={file} onDelete={onDelete} onViewJson={onViewJson} onDownload={onDownload} userGroup={userGroup}/>
         ))}
       </tbody>
     </table>
