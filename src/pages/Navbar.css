@@ -15,7 +15,7 @@ nav {
   }
   
   nav button {
-    background-color: transparent;
+    background-color: #f90;
     border: none;
     color: #fff;
     cursor: pointer;
@@ -29,7 +29,7 @@ nav {
   }
   
   nav button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #ec7211;
   }
   
   @media screen and (max-width: 768px) {
