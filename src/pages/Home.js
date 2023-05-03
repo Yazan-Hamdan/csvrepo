@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import csvtojson from 'csvtojson';
 import { Authenticator } from '@aws-amplify/ui-react';
 import { Auth } from 'aws-amplify';
+import {fetchCsvFilesRepo, deleteCsvFileRepo, handleUploadRepo, downloadHandlerRepo, viewAsJsonHandlerRepo} from '../repos/csv'
 import '@aws-amplify/ui-react/styles.css';
-import Navbar from './Navbar.js';
-import Table from './Table.js';
+import Navbar from '../shared/Navbar.js';
+import Table from '../shared/Table.js';
 import './Home.css';
-
-const API_URL = `${process.env.REACT_APP_API_URL}/dev/csvfiles`;
 
 const Home = () => {
   const [userGroup, setUserGroup] = useState(null);
@@ -19,14 +18,8 @@ const Home = () => {
   const fetchCsvFiles = async () => {
     try {
       const token = await Auth.currentSession();
-      const response = await fetch(API_URL, {
-        headers: {
-          Authorization: `Bearer ${token.getIdToken().getJwtToken()}`,
-        },
-        method: 'GET'
-      });
-      const data = await response.json();
-      setCsvFiles(data.body);
+      const repoResult = await fetchCsvFilesRepo(token, 'GET')
+      setCsvFiles(repoResult.body);
     } catch (err) {
       console.log(err);
     }
@@ -35,12 +28,7 @@ const Home = () => {
   const deleteCsvFile = async (fileName) => {
     try {
       const token = await Auth.currentSession();
-      await fetch(`${API_URL}/${fileName}`, {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${token.getIdToken().getJwtToken()}`,
-        }
-      });
+      await deleteCsvFileRepo(token, 'DELETE', fileName)
       fetchCsvFiles();
     } catch (err) {
       console.log(err);
@@ -55,16 +43,8 @@ const Home = () => {
   const handleUploadClick = async () => {
     try {
       const token = await Auth.currentSession();
-      const formData = new FormData();
-      formData.append('csvFile', selectedFile);
-      await fetch(API_URL, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token.getIdToken().getJwtToken()}`,
-        },
-        body: formData
-      });
-      
+      await handleUploadRepo(token, 'POST', selectedFile)
+
       setSelectedFile(null);
       setShowConfirmation(false);
     } catch (err) {
@@ -77,12 +57,7 @@ const Home = () => {
   const downloadClickHandler = async (fileName) => {
     try {
       const token = await Auth.currentSession();
-      const response = await fetch(`${API_URL}/${fileName}`, {
-        headers: {
-          Authorization: `Bearer ${token.getIdToken().getJwtToken()}`,
-        },
-        method: 'GET',
-      });
+      const response = await downloadHandlerRepo(token, 'GET', fileName)
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
   
@@ -103,12 +78,7 @@ const Home = () => {
   const viewAsJsonHandler = async (fileName) => {
     try {
       const token = await Auth.currentSession();
-      const response = await fetch(`${API_URL}/${fileName}`, {
-        headers: {
-          Authorization: `Bearer ${token.getIdToken().getJwtToken()}`,
-        },
-        method: 'GET',
-      });
+      const response = await viewAsJsonHandlerRepo(token, 'GET', fileName)
       const csvText = await response.text();
       const jsonObj = await csvtojson().fromString(csvText);
       setJsonObj(jsonObj);
