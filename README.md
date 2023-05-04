@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+# CSV Repo
+This is a React project called `CSV Repo` that utilizes AWS services for user authorization and authentication, as well as all the backend services. This project allows users to upload and view CSV files.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Prerequisites
 
-## Available Scripts
+Before running the application, you should create an `.env` file in the root directory of the project, which contains two environment variables:
 
-In the project directory, you can run:
+- `REACT_APP_API_URL`: The base URL of the application hosted on AWS
+- `REACT_APP_COGINTO_URL`: The Cognito page that the application uses
 
-### `npm start`
+## Getting started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+To get started, clone this repository and navigate to the project directory in your terminal. Run `npm install` to install all the dependencies. Then, run `npm start` to start the application on port `3000` by default.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+git clone https://github.com/Yazan-Hamdan/csvrepo
+npm install 
+npm start
+```
 
-### `npm test`
+# Functionalities
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This project is designed to provide users with the ability to manage CSV files on AWS. There are 5 main functionalities available:
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 1 Upload a CSV File to S3 and DynamoDB
+Users can upload a CSV file to the AWS S3 bucket and DynamoDB database through `CSV Repo`. This will store the data in a structured format for easy retrieval and analysis.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 2 Download a CSV File from S3
+Users can download a CSV file from the AWS S3 bucket through `CSV Repo`. This will allow them to export data for use in other applications or for analysis.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 3 List All Available CSV Files in S3 Bucket 
+Users can list all the available CSV files in the AWS S3 bucket through `CSV Repo`. This will allow them to quickly find the files they need and access them easily.
 
-### `npm run eject`
+## 4 Manage User Permissions
+Admin users can manage user permissions in `CSV Repo`. This will allow them to control who has access to specific files and functions within the application. Writers and Readers do not have access to this functionality.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 5 View CSV File Content in a JSON Format
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Users can view the content of a CSV file in a JSON format through `CSV Repo`. This will allow them to quickly analyze the data and extract useful insights.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## Users
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+`CSV Repo` has 3 types of users: `Admins`, `Writers`, and `Readers`. Each type of user has a different set of permissions within the application:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+* `Admins`: can perform all functionalities mentioned above, including upload, download, list, manage user permissions, and view file content in JSON format.
 
-### Code Splitting
+* `Writers`: can perform all functionalities except Delete and managing user permissions. This means they can upload, download, list, and view file content in JSON format.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* `Readers`: can only list the available CSV files, read a file in a JSON format, and download the file. They do not have access to any functionality related to uploading, managing user permissions, or deleting files.
