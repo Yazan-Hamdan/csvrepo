@@ -51,7 +51,6 @@ const Home = () => {
       console.log(err);
     } finally {
       fetchCsvFiles();
-      setSelectedFile(null)
     }
   };
 
@@ -105,10 +104,10 @@ const Home = () => {
               { (userGroup == 'Admins' || userGroup == 'Writers') &&
                 <>
                   <label htmlFor='file-upload' className='input-label'>{selectedFile ? selectedFile.name : "Choose File"}</label>
-                  <input type="file" onChange={handleFileInput} id='file-upload'/>
+                  <input type="file" onChange={handleFileInput} onClick={(event) => {event.target.value = null}} id='file-upload'/>
                   {showConfirmation && (
                     <>
-                      <button onClick={() => {handleUploadClick()}} className='confirm-upload-button delete-button'>Confirm Upload</button>
+                      <button onClick={handleUploadClick} className='confirm-upload-button delete-button'>Confirm Upload</button>
                       <button onClick={() => {setShowConfirmation(false); setSelectedFile(null)}} className='delete-button'>Cancel Upload</button>
                     </>
                   )}
